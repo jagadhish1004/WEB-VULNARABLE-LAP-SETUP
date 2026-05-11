@@ -1,30 +1,32 @@
-# 🔥 Vulnerable Web Application Lab
+# 🔥 Vulnerable Flask Web Application Lab
 
-A deliberately vulnerable web application built using Flask for VAPT, bug bounty, and web security learning purposes.
+A deliberately vulnerable Flask web application created for:
 
-This project contains intentionally insecure implementations of common web vulnerabilities for educational and testing environments only.
+- VAPT Practice
+- Bug Bounty Training
+- OWASP Learning
+- Web Exploitation Practice
 
 ---
 
 # 🚀 Features
 
+## Vulnerabilities Included
+
 - SQL Injection
-- Cross-Site Scripting (XSS)
-- IDOR (Insecure Direct Object Reference)
+- Cross Site Scripting (XSS)
+- IDOR
 - Command Injection
 - File Upload Vulnerability
-- Weak Session Management
-- Cookie Tampering
-- Flask Debug Mode
+- Weak Flask Session Management
 
 ---
 
-# 🛠️ Tech Stack
+# 🛠️ Technologies
 
 - Python 3
 - Flask
-- SQLite
-- HTML
+- HTML/CSS
 - Kali Linux
 
 ---
@@ -33,13 +35,24 @@ This project contains intentionally insecure implementations of common web vulne
 
 ```bash
 vulnerable-lab/
+│
 ├── app.py
+├── requirements.txt
+├── README.md
+├── .gitignore
+│
 ├── templates/
-├── static/
-├── uploads/
+│   ├── index.html
+│   ├── login.html
+│   ├── xss.html
+│   ├── cmd.html
+│   ├── upload.html
+│   ├── idor.html
+│   └── cookie.html
+│
 ├── screenshots/
-├── docs/
-└── README.md
+│
+└── uploads/
 ```
 
 ---
@@ -54,18 +67,25 @@ git clone https://github.com/YOUR_USERNAME/vulnerable-lab.git
 cd vulnerable-lab
 ```
 
+---
+
 ## Create Virtual Environment
 
 ```bash
 python3 -m venv venv
+
 source venv/bin/activate
 ```
 
-## Install Dependencies
+---
+
+## Install Requirements
 
 ```bash
 pip install -r requirements.txt
 ```
+
+---
 
 ## Run Application
 
@@ -81,9 +101,9 @@ http://127.0.0.1:5000
 
 ---
 
-# 🧪 Vulnerability Labs
+# 🧪 Vulnerability Routes
 
-| Vulnerability | Route |
+| Vulnerability | Endpoint |
 |---|---|
 | SQL Injection | /login |
 | XSS | /xss |
@@ -91,44 +111,6 @@ http://127.0.0.1:5000
 | Command Injection | /cmd |
 | File Upload | /upload |
 | Cookie Tampering | /cookie |
-
----
-
-# 📸 Screenshots
-
-## Home Page
-
-![Home](screenshots/home.png)
-
----
-
-## SQL Injection
-
-![SQLi](screenshots/sql-login.png)
-
----
-
-## XSS
-
-![XSS](screenshots/xss.png)
-
----
-
-## Command Injection
-
-![CMD](screenshots/cmd.png)
-
----
-
-## File Upload
-
-![Upload](screenshots/upload.png)
-
----
-
-## Cookie Tampering
-
-![Cookie](screenshots/cookie.png)
 
 ---
 
@@ -140,11 +122,15 @@ http://127.0.0.1:5000
 admin' OR '1'='1
 ```
 
+---
+
 ## XSS
 
 ```html
 <script>alert('XSS')</script>
 ```
+
+---
 
 ## Command Injection
 
@@ -154,45 +140,35 @@ admin' OR '1'='1
 
 ---
 
+# 📸 Screenshots
+
+Add screenshots inside:
+
+```bash
+screenshots/
+```
+
+Example:
+
+- home.png
+- xss.png
+- sqli.png
+- cmd.png
+
+---
+
 # ⚠️ Disclaimer
 
-This project is intentionally vulnerable and must only be used:
+This project is intentionally vulnerable and must ONLY be used for:
 
-- In local environments
-- For educational purposes
-- For legal security testing
+- Educational purposes
+- Local testing
+- Authorized environments
 
-Do NOT deploy publicly.
-
----
-
-# 📚 Learning Objectives
-
-- Understand common web vulnerabilities
-- Practice VAPT techniques
-- Learn manual testing
-- Use Burp Suite & OWASP methodologies
-- Build exploit development skills
-
----
-
-# 🧰 Recommended Tools
-
-- Burp Suite
-- OWASP ZAP
-- sqlmap
-- ffuf
-- flask-unsign
+DO NOT deploy publicly.
 
 ---
 
 # 👨‍💻 Author
 
-Developed by Jaga for VAPT practice and security research.
-.gitignore
-          venv/
-__pycache__/
-*.pyc
-database.db
-uploads/
-.env
+Jaga — VAPT Learner & Security Research Enthusiast
