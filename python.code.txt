@@ -1,0 +1,190 @@
+from flask import Flask, request, render_template_string
+from flask_sqlalchemy import SQLAlchemy
+import os
+
+app = Flask(__name__)
+
+# Database Config
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+# ----------------------
+# Database Model
+# ----------------------
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(100))
+    password = db.Column(db.String(100))
+
+# ----------------------
+# Home Page
+# ----------------------
+
+@app.route("/")
+def home():
+    return """
+    <h1>🔥 Vulnerable Flask Lab</h1>
+
+    <ul>
+        <li><a href='/login'>SQL Injection</a></li>
+        <li><a href='/xss'>XSS</a></li>
+        <li><a href='/cmd'>Command Injection</a></li>
+        <li><a href='/upload'>File Upload</a></li>
+        <li><a href='/cookie'>Cookie Demo</a></li>
+    </ul>
+    """
+
+# ----------------------
+# SQL Injection
+# ----------------------
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+    if request.method == "POST":
+
+        username = request.form['username']
+        password = request.form['password']
+
+        # INTENTIONALLY VULNERABLE
+        query = f"SELECT * FROM user WHERE username='{username}' AND password='{password}'"
+
+        result = db.session.execute(query)
+
+        return f"""
+        <h2>SQL Query:</h2>
+        <pre>{query}</pre>
+
+        <h3>Executed Successfully</h3>
+        """
+
+    return """
+    <h1>SQL Injection Login</h1>
+
+    <form method='POST'>
+        Username:<br>
+        <input type='text' name='username'><br><br>
+
+        Password:<br>
+        <input type='password' name='password'><br><br>
+
+        <input type='submit'>
+    </form>
+
+    <p>Try Payload:</p>
+
+    <code>' OR '1'='1</code>
+    """
+
+# ----------------------
+# XSS
+# ----------------------
+
+@app.route("/xss")
+def xss():
+
+    name = request.args.get("name", "")
+
+    return f"""
+    <h1>XSS Demo</h1>
+
+    <form>
+        <input type='text' name='name'>
+        <input type='submit'>
+    </form>
+
+    <h2>Hello {name}</h2>
+    """
+
+# ----------------------
+# Command Injection
+# ----------------------
+
+@app.route("/cmd", methods=["GET", "POST"])
+def cmd():
+
+    output = ""
+
+    if request.method == "POST":
+
+        ip = request.form['ip']
+
+        # INTENTIONALLY VULNERABLE
+        command = f"ping -c 1 {ip}"
+
+        output = os.popen(command).read()
+
+    return f"""
+    <h1>Command Injection</h1>
+
+    <form method='POST'>
+        <input type='text' name='ip'>
+        <input type='submit'>
+    </form>
+
+    <pre>{output}</pre>
+
+    <p>Try:</p>
+
+    <code>127.0.0.1; whoami</code>
+    """
+
+# ----------------------
+# File Upload
+# ----------------------
+
+@app.route("/upload", methods=["GET", "POST"])
+def upload():
+
+    message = ""
+
+    if request.method == "POST":
+
+        file = request.files['file']
+
+        upload_path = "uploads/" + file.filename
+
+        os.makedirs("uploads", exist_ok=True)
+
+        file.save(upload_path)
+
+        message = f"Uploaded: {file.filename}"
+
+    return f"""
+    <h1>File Upload</h1>
+
+    <form method='POST' enctype='multipart/form-data'>
+        <input type='file' name='file'>
+        <input type='submit'>
+    </form>
+
+    <h3>{message}</h3>
+    """
+
+# ----------------------
+# Cookie Demo
+# ----------------------
+
+@app.route("/cookie")
+def cookie():
+
+    username = request.cookies.get("username")
+
+    if username:
+        return f"<h1>Welcome {username}</h1>"
+
+    response = app.make_response("<h1>Cookie Set</h1>")
+
+    response.set_cookie("username", "admin")
+
+    return response
+
+# ----------------------
+# Run App
+# ----------------------
+
+if __name__ == "__main__":
+    app.run(debug=False)
