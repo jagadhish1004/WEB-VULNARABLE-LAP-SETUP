@@ -1,0 +1,10 @@
+<h1>🔥 Vulnerable Web Lab</h1>
+
+    <ul>
+        <li><a href='/login'>SQL Injection</a></li>
+        <li><a href='/xss'>XSS Lab</a></li>
+        <li><a href='/idor?id=1'>IDOR Lab</a></li>
+        <li><a href='/cmd'>Command Injection</a></li>
+        <li><a href='/upload'>File Upload</a></li>
+        <li><a href='/cookie'>Cookie Demo</a></li>
+    </ul>
