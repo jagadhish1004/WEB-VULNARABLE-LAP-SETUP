@@ -189,6 +189,57 @@ Command Injection	; ls, && whoami, | nc, PowerShell	Commix
 LFI/RFI	../../../etc/passwd, PHP wrappers, TFTP	gf lfi, LFI payloads
 CSRF	Missing tokens, GET actions	CSRF PoC generator
 
+   Burp Suite Community Workflow:
+
+text
+1. Proxy → Target → Scope
+2. Spider → Map app
+3. Repeater → Test payloads
+4. Intruder → Fuzz parameters
+5. Scanner → Auto-detect
+
+
+   🏆 Training Roadmap
+
+text
+Week 1:  SQLi + XSS (Low/Medium) → Burp basics
+Week 2:  File Upload + LFI → Custom payloads  
+Week 3:  Command Inj + Auth → Automation
+Week 4:  High/Impossible → Bypass techniques
+Week 5:  CTF + Report writing
+
+Cert Prep: eJPT, eWPT, OSCP, Burp Certified
+
+
+🐛 Troubleshooting
+ 
+Issue	Fix
+500 Error	sudo chmod -R 755 storage/
+DB Connection	Check .env creds
+XSS Blocked	Switch security level
+Upload Fails	Disable mod_security
+Slow Performance	docker stats + increase RAM
+
+Logs: docker logs vulnweblab
+
+
+  🤝 Contributing
+
+text
+1. Fork → Clone → Branch (feature/add-sqli-timebased)
+2. Add vulnerability → Test all levels
+3. Write payloads → Update docs
+4. PR with writeup → 🎉
+
+👨‍💻 Author
+
+Jagadish A
+Web Application Penetration Tester | Bug Bounty Hunter | Security Trainer
+🌐 Portfolio	📧 Contact	💼 LinkedIn	🐦 X/Twitter
+jagadish-prof.netlify.app	ajagadish0987@gmail.com	in/jagadish-a	@jagadish_sec
+
+Special Thanks: OWASP, PortSwigger, sqlmap team
+
 
 
   
