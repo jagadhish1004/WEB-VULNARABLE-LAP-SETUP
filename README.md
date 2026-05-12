@@ -168,7 +168,29 @@ This project is intentionally vulnerable and must ONLY be used for:
 DO NOT deploy publicly.
 
 ---
+📊 Vulnerability Coverage
 
-# 👨‍💻 Author
+    OWASP Top 10	Coverage	Difficulty Levels
+A1: Injection	SQLi, Command Inj	Low/Med/High/Impossible
+A3: XSS	Reflected, Stored, DOM	4 Levels
+A5: Security Misconfig	File Upload RCE	Unrestricted
+A7: XSSI/CSRF	Token Bypass	Multiple Vectors
+A10: LFI/RFI	Path Traversal	Absolute/Relative
 
-Jaga — VAPT Learner & Security Research Enthusiast
+Total Challenges: 25+ | Score Tracking: Yes | Hints: Per Challenge
+
+ Challenges: Login: admin / password | Guest mode available
+🎯 Supported Attack Vectors
+Vulnerability	Payload Examples	Tools
+SQL Injection	' OR 1=1--, UNION SELECT, Blind Tautology	sqlmap, Burp
+XSS	<script>alert(1)</script>, javascript:alert(), DOM	XSStrike, dalfox
+File Upload	shell.php, ..%2f, MIME Bypass	Burp, file inclusion
+Command Injection	; ls, && whoami, | nc, PowerShell	Commix
+LFI/RFI	../../../etc/passwd, PHP wrappers, TFTP	gf lfi, LFI payloads
+CSRF	Missing tokens, GET actions	CSRF PoC generator
+
+
+
+
+       
+
