@@ -1,0 +1,5 @@
+# Ubuntu/Debian
+sudo apt update && sudo apt install apache2 mysql-server php php-mysql php-gd
+git clone https://github.com/jagadish1004/VulnWebLab.git /var/www/html/vulnweblab
+sudo mysql -e "CREATE DATABASE vulnlab; GRANT ALL ON vulnlab.* TO 'vuln'@'%' IDENTIFIED BY 'vuln123';"
+cd /var/www/html/vulnweblab && sudo ./setup.sh
